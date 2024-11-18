@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+
+  background-image: url("1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Optional: Makes background fixed when scrolling */
+}
+
+.cel {
+  height: 130px;
+  width: 130px;
+  opacity: 1; /* Keep it at 1 for no grey-out effect */
+  border: 1px solid rgb(255, 255, 255);
+  background-color: transparent;
+}
+
+.cel:disabled {
+  color: black; 
+  opacity: 1; 
+  cursor: not-allowed;
+}
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pop {
+  animation: pop-in 0.5s ease-out forwards;
+ 
+  
+}
