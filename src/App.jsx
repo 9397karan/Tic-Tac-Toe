@@ -39,19 +39,43 @@ checkWinner(update);
 setTimeout(()=>updatePc(update),500)
  }
 
- const updatePc=(b)=>{
-  let available=b.map((e,i)=> (e=== null?i:null)).filter((e)=> e!==null);
-  let pcChoice=available[Math.floor(Math.random()*available.length)];
-const updated=b.map((e,i)=>{
-  if(i === pcChoice){
-    return "O"
-  }else{
-   return  e
+//  const updatePc=(b)=>{
+//   let available=b.map((e,i)=> (e=== null?i:null)).filter((e)=> e!==null);
+//   let pcChoice=available[Math.floor(Math.random()*available.length)];
+// const updated=b.map((e,i)=>{
+//   if(i === pcChoice){
+//     return "O"
+//   }else{
+//    return  e
+//   }
+// })
+// setBoard(updated);
+//   checkWinner(updated);
+//  }
+
+const updatePc=(b)=>{
+  let available=b.map((e,i)=>(e=== null?i:null)).filter((e,i)=> e!==null);
+  let move=null;
+  for(let [x,y,z]of winPattern){
+    if((b[x] === "X" && b[y] === "X" && b[z]===null)||
+    (b[x] === "X" && b[z] === "X" && b[y]===null)||
+    (b[y] === "X" && b[z] === "X" && b[x]===null)
+  ){
+    move=[x,y,z].find((index)=> b[index]===null);
+    break;
   }
-})
-setBoard(updated);
+  }
+  let pcChoice=move !== null? move:available[Math.floor(Math.random()*available.length)];
+  const updated=b.map((e,i)=>{
+    if(i=== pcChoice){
+      return "O"
+    }else{
+      return e
+    }
+  })
+  setBoard(updated)
   checkWinner(updated);
- }
+}
 
  let winPattern=[
   [0,1,2],
@@ -86,7 +110,7 @@ function restart(){
 
   return (
     <>
-    {winner || draw ? (<Pop restart={restart} winner={winner}/>):null}
+    {winner || draw ? (<Pop restart={restart} winner={winner} draw={draw}/>):null}
     <div className='container w-full p-3 h-screen overflow-hidden'>
     <div class="relative mt-[30vh] left-[40vw] h-screen">
 

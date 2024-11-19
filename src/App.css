@@ -1,41 +1,76 @@
+/* Reset and Box-Sizing */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.board {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-content: center;
-  margin-top: 20px;
+/* Body Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #0f172a; /* Dark blue background */
+  color: #fff; /* Text color */
+  overflow: hidden; /* Optional: Prevent scrolling */
 }
 
+/* Main Container */
 .container {
   width: 100%;
+  height: 100vh;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-  background-image: url("/1.jpg");
+  background-image: url("/1.jpg"); /* Background image */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* Optional: Makes background fixed when scrolling */
+  background-attachment: fixed; /* Fixed background effect */
+  backdrop-filter: blur(5px); /* Glassmorphism effect */
 }
 
+/* Board Styling */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px; /* Add space between cells */
+  padding: 15px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1); /* Transparent white background */
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+}
+
+/* Cell Styling */
 .cel {
   height: 130px;
   width: 130px;
-  opacity: 1; /* Keep it at 1 for no grey-out effect */
-  border: 1px solid rgb(255, 255, 255);
-  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8); /* Subtle white */
+  border: 2px solid rgba(255, 255, 255, 0.3); /* Border with transparency */
+  border-radius: 8px; /* Rounded corners */
+  background: rgba(255, 255, 255, 0.1); /* Slightly transparent white */
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transitions */
+  cursor: pointer;
 }
 
+/* Hover Effect for Cell */
+.cel:hover:not(:disabled) {
+  transform: scale(1.1); /* Enlarge on hover */
+  background-color: rgba(255, 255, 255, 0.2); /* Brighter background */
+}
+
+/* Disabled Cell */
 .cel:disabled {
-  color: black; 
-  opacity: 1; 
+  color: rgba(255, 255, 255, 0.5); /* Muted color for disabled cells */
+  background-color: rgba(0, 0, 0, 0.2); /* Darker background */
   cursor: not-allowed;
 }
+
+/* Pop-Up Animation */
 @keyframes pop-in {
   0% {
     opacity: 0;
@@ -49,6 +84,30 @@
 
 .pop {
   animation: pop-in 0.5s ease-out forwards;
- 
   
+  background: rgba(0, 0, 0, 0.8); /* Dark background for contrast */
+  border: 2px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.5); /* Pop-up shadow */
+  color: #fff; /* Text color */
+}
+
+/* Pop-Up Button Styling */
+.pop button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 18px;
+  color: #0f172a;
+  background: #fff; /* White button */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Button Hover Effect */
+.pop button:hover {
+  background: #38bdf8; /* Light blue on hover */
+  transform: scale(1.1); /* Slightly enlarge on hover */
 }
